@@ -1,0 +1,29 @@
+sudo: required
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      
+    packages:
+      - cmake
+      - cmake-data
+      - g++-6
+      - libgtest-dev
+      - valgrind
+
+
+before_install:
+  - git clone --recursive https://github.com/Grauniad/CMakeUtils.git
+  - cd CMakeUtils
+  - ./travis/installGTest.sh
+  - cd ..
+  - ./buildDeps.sh
+
+install:
+  - export CXX="g++-6"
+  - export CC="gcc-6"
+  
+script: 
+  - g++-6 --version
+  - ./buildFromDeps.sh
