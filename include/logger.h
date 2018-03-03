@@ -1,7 +1,6 @@
 #ifndef __LOGGER_H__
 #define __LOGGER_H__
 
-#include "binaryWriter.h"
 #include <set>
 #include <sstream>
 #include <vector>
@@ -34,7 +33,9 @@
 // Expressions for logging messages
 #include "logger_preProcessor.h"
 
-class Time;
+namespace nstimestamp {
+    class Time;
+}
 
 // Valid Log Levels
 using namespace std; 
@@ -62,7 +63,7 @@ public:
     // The pointer is good only for the lifetime of the call
     virtual void Log( const string& message,
                       const string& context, 
-                      const Time& time,
+                      const nstimestamp::Time& time,
                       LOG_LEVEL level) = 0;
 
     virtual ~LogDevice(){};
@@ -74,21 +75,6 @@ private:
     // Prevent more then one copy of the same ID
     LogDevice& operator=(const LogDevice& rhs) = delete;
     LogDevice(const LogDevice& rhs) = delete;
-};
-
-/*
- * Common instances
- */
-class LogDevice_BinaryWriter: public LogDevice { 
-    LogDevice_BinaryWriter(BinaryWriter& w): log(w){}
-
-    virtual void Log( const string& message,
-                      const string& context, 
-                      const Time& time,
-                      LOG_LEVEL level);
-
-private:
-    BinaryWriter& log;
 };
 
 class LogFactory {
@@ -103,7 +89,7 @@ class GenericFormatLogger {
 public:
     static string Format( const string& message,
                           const string& context,
-                          const Time& time,
+                          const nstimestamp::Time& time,
                           LOG_LEVEL level);
 };
 
@@ -135,9 +121,6 @@ public:
     void LogMessage( const string& message, 
                             LOG_LEVEL level,
                             const string& context="Log Message");
-    void LogMessage( const BinaryReader& msg, 
-                            LOG_LEVEL level,
-                            const string& context="Log Message");
     const string& GetName( LOG_LEVEL level ) {
         return logLevelNames[level];
     }
@@ -155,7 +138,7 @@ private:
 
         void Log( const string& message, 
                   const string& context, 
-                  const Time& time,
+                  const nstimestamp::Time& time,
                   LOG_LEVEL level) const {
             log->Log(message, context ,time, level);
         }

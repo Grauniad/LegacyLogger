@@ -1,11 +1,10 @@
 #include "logger.h"
 #include "env.h"
+#include "util_time.h"
 #include <iostream>
-#include <string>
-#include <sstream>
-#include <util_time.h>
 
 using namespace std;
+using namespace nstimestamp;
 
 LogDevice::LogDevice() {
     static unsigned long nextId =0;
@@ -122,20 +121,6 @@ void Logger::LogMessage( const string& message,
     for(const LogDeviceKey& device: devices) {
         device.Log(message, context, Time(), level );
     }
-}
-
-void Logger::LogMessage( const BinaryReader& msg, 
-                         LOG_LEVEL level,
-                         const string& context) {
-    string&& text = msg.ReadString();
-    LogMessage(text,level, context);
-}
-
-void LogDevice_BinaryWriter::Log( const string& message,
-                  const string& context, 
-                  const Time& time,
-                  LOG_LEVEL level) {
-    log << GenericFormatLogger::Format(message,context,time,level);
 }
 
 string GenericFormatLogger::Format( const string& message,
