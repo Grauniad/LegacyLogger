@@ -1,0 +1,2 @@
+# LegacyLogger
+Toy Logging class
