@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ -e LogConfig.cmake ]]; then
+if [[ -e DevToolsLogConfig.cmake ]]; then
     echo "Building dependencies..."
 else
     echo "This script should be run in the home directory of the project"
