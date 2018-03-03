@@ -1,4 +1,3 @@
-set(CMAKE_PREFIX_PATH /home/lhumphreys/dev_tools_build/lib/cmake)
 find_package(OSDevTools 0.1 REQUIRED)
 find_package(UtilTime 0.1 REQUIRED)
 #

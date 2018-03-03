@@ -38,3 +38,7 @@ deps
 .project
 .settings
 
+CMakeCache.txt
+DevToolsLogConfigVersion.cmake
+cmake_install.cmake
+CMakeFiles
