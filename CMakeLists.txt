@@ -22,6 +22,10 @@ target_link_libraries(Log PRIVATE
     OSDevTools::OSDevTools
     UtilTime::Time
 )
+set_property(TARGET Log PROPERTY PUBLIC_HEADER
+    ${DevToolsLog_SOURCE_DIR}/include/logger.h
+    ${DevToolsLog_SOURCE_DIR}/include/logger_preProcessor.h
+)
 
 #
 # Installation instructions
