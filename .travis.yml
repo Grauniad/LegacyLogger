@@ -1,4 +1,4 @@
-sudo: required
+sudo: false
 
 addons:
   apt:
@@ -9,7 +9,6 @@ addons:
       - cmake
       - cmake-data
       - g++-7
-      - valgrind
 
 
 before_install:
