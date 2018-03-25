@@ -1,4 +1,4 @@
-sudo: required
+sudo: false
 
 addons:
   apt:
@@ -8,22 +8,17 @@ addons:
     packages:
       - cmake
       - cmake-data
-      - g++-6
-      - libgtest-dev
-      - valgrind
+      - g++-7
 
 
 before_install:
-  - git clone --recursive https://github.com/Grauniad/CMakeUtils.git
-  - cd CMakeUtils
-  - ./travis/installGTest.sh
-  - cd ..
+  - git clone https://github.com/Grauniad/CMakeUtils.git
   - ./buildDeps.sh
 
 install:
-  - export CXX="g++-6"
-  - export CC="gcc-6"
+  - export CXX="g++-7"
+  - export CC="gcc-7"
   
 script: 
-  - g++-6 --version
+  - g++-7 --version
   - ./buildFromDeps.sh
