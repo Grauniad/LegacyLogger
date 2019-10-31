@@ -147,7 +147,7 @@ private:
         class Less {
         public:
             bool operator()( const LogDeviceKey& lhs, 
-                             const LogDeviceKey& rhs) {
+                             const LogDeviceKey& rhs) const {
                 return   lhs.log->LogDevice_Id 
                        < rhs.log->LogDevice_Id;
             }
